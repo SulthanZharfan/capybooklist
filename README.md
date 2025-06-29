@@ -1,16 +1,12 @@
-# capybooklist
+# :bookmark_tabs: Capybooklist - KELOMPOK 1
 
-A new Flutter project.
+## Tentang Proyek
+Proyek ini adalah Tugas Besar untuk mata kuliah **Pemrograman Berbasis Mobile** CapyBookList adalah aplikasi sederhana yang memungkinkan pengguna membaca buku digital dengan cara mengunggah (upload) file buku mereka sendiri. Aplikasi ini memberikan pengalaman membaca yang lebih personal dan dinamis dengan menggabungkan fitur cuaca melalui API Weather.
 
-## Getting Started
+## Anggota Kelompok
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+| icon             | Nama                     | NPM          | Peran               |
+|---------------------|--------------------------|--------------|---------------------|
+|    :smile:   | **Husein Zidan**         | 4522210012   | Arsitek Software    |
+|    :grin:      | **Muhammad Sulthan Zharfan**| 4522210016   | Backend Engineer    |
+|    :hushed:     | **Zahra Jane Arnecia**   | 4522210028   | Frontend Engineer   |
