@@ -1,21 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:capybooklist/config/theme.dart';
-import 'package:capybooklist/screens/splash_screen.dart';
+import 'package:capybooklist/screens/main_navigation_screen.dart';
 
 void main() {
-  runApp(const CapyBooklistApp());
+  runApp(const MyApp());
 }
 
-class CapyBooklistApp extends StatelessWidget {
-  const CapyBooklistApp({super.key});
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Capybooklist',
       debugShowCheckedModeBanner: false,
-      theme: AppTheme.lightTheme, // Material 3 dari theme.dart
-      home: const SplashScreen(),  // Layar awal
+      title: 'CapyBookList',
+      home: const MainNavigationScreen(),
     );
   }
 }
