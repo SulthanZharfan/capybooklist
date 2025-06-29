@@ -10,3 +10,17 @@ Proyek ini adalah Tugas Besar untuk mata kuliah **Pemrograman Berbasis Mobile** 
 |    :smile:   | **Husein Zidan**         | 4522210012   | Arsitek Software    |
 |    :grin:      | **Muhammad Sulthan Zharfan**| 4522210016   | Backend Engineer    |
 |    :hushed:     | **Zahra Jane Arnecia**   | 4522210028   | Frontend Engineer   |
+
+## Catatan
+husein:
+
+SDK Version : 3.7.2
+Flutter : 3.29.2
+zahra:
+
+SDK Version : 3.7.0
+Flutter : 3.29.0
+sulthan:
+
+SDK Version : 3.7.2
+Flutter : 3.29.2
