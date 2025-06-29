@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:capybooklist/db/user_dao.dart';
+import 'package:capybooklist/models/user.dart';
 import 'package:capybooklist/screens/home_screen.dart';
+import 'package:capybooklist/screens/user_profile_screen.dart';
+import 'package:capybooklist/screens/main_navigation_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -12,16 +16,28 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    _goToHome();
+    _checkUser();
   }
 
-  Future<void> _goToHome() async {
+  Future<void> _checkUser() async {
     await Future.delayed(const Duration(seconds: 2)); // simulasi loading
+
+    final user = await UserDao().getUser();
     if (!mounted) return;
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (_) => const HomeScreen()),
-    );
+
+    if (user == null) {
+      // User belum diisi -> ke form profile
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (_) => const UserProfileScreen()),
+      );
+    } else {
+      // User sudah ada -> ke home
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (_) => const MainNavigationScreen()),
+      );
+    }
   }
 
   @override
