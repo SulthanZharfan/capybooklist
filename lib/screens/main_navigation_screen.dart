@@ -15,18 +15,66 @@ class MainNavigationScreen extends StatefulWidget {
 class _MainNavigationScreenState extends State<MainNavigationScreen> {
   int _selectedIndex = 0;
 
-  final List<Widget> _screens = [
+  final List<Widget> _screens = const [
     HomeScreen(),
     BookFormScreen(),
     UserProfileScreen(),
   ];
 
+  final List<NavigationRailDestination> _railDestinations = const [
+    NavigationRailDestination(
+      icon: Icon(Icons.home),
+      selectedIcon: Icon(Icons.home, color: Colors.white),
+      label: Text('Home'),
+    ),
+    NavigationRailDestination(
+      icon: Icon(Icons.add_box),
+      selectedIcon: Icon(Icons.add_box, color: Colors.white),
+      label: Text('Add'),
+    ),
+    NavigationRailDestination(
+      icon: Icon(Icons.person),
+      selectedIcon: Icon(Icons.person, color: Colors.white),
+      label: Text('Account'),
+    ),
+  ];
+
   @override
   Widget build(BuildContext context) {
+    final isPortrait = MediaQuery.of(context).orientation == Orientation.portrait;
+
     return Scaffold(
       extendBody: true,
-      body: _screens[_selectedIndex],
-      bottomNavigationBar: CurvedNavigationBar(
+      body: isPortrait
+          ? _screens[_selectedIndex]
+          : Row(
+        children: [
+          // SIDE NAVIGATION RAIL
+          NavigationRail(
+            selectedIndex: _selectedIndex,
+            onDestinationSelected: (index) {
+              setState(() {
+                _selectedIndex = index;
+              });
+            },
+            backgroundColor: const Color(0xFF262C4F).withOpacity(0.9),
+            selectedIconTheme: const IconThemeData(color: Colors.white, size: 28),
+            unselectedIconTheme: const IconThemeData(color: Colors.grey, size: 24),
+            selectedLabelTextStyle: const TextStyle(color: Colors.white),
+            unselectedLabelTextStyle: const TextStyle(color: Colors.grey),
+            labelType: NavigationRailLabelType.all,
+            destinations: _railDestinations,
+          ),
+
+          // MAIN CONTENT
+          Expanded(
+            child: _screens[_selectedIndex],
+          ),
+        ],
+      ),
+
+      bottomNavigationBar: isPortrait
+          ? CurvedNavigationBar(
         index: _selectedIndex,
         onTap: (index) {
           setState(() {
@@ -42,7 +90,8 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
           Icon(Icons.add_box, color: Colors.white, size: 30),
           Icon(Icons.person, color: Colors.white, size: 30),
         ],
-      ),
+      )
+          : null,
     );
   }
 }

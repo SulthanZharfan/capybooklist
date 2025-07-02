@@ -169,18 +169,32 @@ class _BookFormScreenState extends State<BookFormScreen> {
                       ElevatedButton.icon(
                         onPressed: _addBook,
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0x88262C4F),
+                          backgroundColor: const Color(0xFFB0B4D8), // lebih terang
+                          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
                         ),
-                        icon: const Icon(Icons.add, color: Colors.white),
-                        label: const Text('Add Book'),
+                        icon: const Icon(Icons.add, color: Color(0xFF262C4F)), // warna gelap
+                        label: const Text(
+                          'Add Book',
+                          style: TextStyle(color: Color(0xFF262C4F)),
+                        ),
                       ),
                       ElevatedButton.icon(
                         onPressed: _removeLastBook,
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0x88262C4F),
+                          backgroundColor: const Color(0xFFB0B4D8), // lebih terang
+                          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
                         ),
-                        icon: const Icon(Icons.remove, color: Colors.white),
-                        label: const Text('Remove Book'),
+                        icon: const Icon(Icons.remove, color: Color(0xFF262C4F)), // warna gelap
+                        label: const Text(
+                          'Remove Book',
+                          style: TextStyle(color: Color(0xFF262C4F)),
+                        ),
                       ),
                     ],
                   ),
