@@ -20,7 +20,12 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
   @override
   void initState() {
     super.initState();
+    _updateLastOpened();
     _loadBookmarks();
+  }
+
+  Future<void> _updateLastOpened() async {
+    await dbHelper.updateLastOpenedAt(widget.book.id!);
   }
 
   Future<void> _loadBookmarks() async {
@@ -92,7 +97,7 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
         title: Text(widget.book.title),
         actions: [
           IconButton(
-            icon: Icon(Icons.edit),
+            icon: const Icon(Icons.edit),
             tooltip: 'Rename Book',
             onPressed: _renameBook,
           ),
@@ -115,7 +120,7 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                       widget.book.title,
                       style: theme.textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
                     ),
-                    SizedBox(height: 6),
+                    const SizedBox(height: 6),
                     Text(
                       'Author: ${widget.book.author ?? "Unknown"}',
                       style: theme.textTheme.bodyMedium,
@@ -128,16 +133,24 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                           style: theme.textTheme.bodySmall?.copyWith(color: Colors.grey[700]),
                         ),
                       ),
+                    if (widget.book.lastOpenedAt != null)
+                      Padding(
+                        padding: const EdgeInsets.only(top: 8.0),
+                        child: Text(
+                          'Last Opened: ${widget.book.lastOpenedAt}',
+                          style: theme.textTheme.bodySmall?.copyWith(color: Colors.grey[600]),
+                        ),
+                      ),
                   ],
                 ),
               ),
             ),
-            SizedBox(height: 24),
+            const SizedBox(height: 24),
             Text(
               'Bookmarks',
               style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             _bookmarks.isEmpty
                 ? Padding(
               padding: const EdgeInsets.all(12.0),
@@ -150,12 +163,12 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
             )
                 : ListView.builder(
               shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               itemCount: _bookmarks.length,
               itemBuilder: (context, index) {
                 final bm = _bookmarks[index];
                 return Card(
-                  margin: EdgeInsets.symmetric(vertical: 6),
+                  margin: const EdgeInsets.symmetric(vertical: 6),
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                   elevation: 2,
                   child: ListTile(
@@ -169,12 +182,12 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         IconButton(
-                          icon: Icon(Icons.edit, color: Colors.amber),
+                          icon: const Icon(Icons.edit, color: Colors.amber),
                           tooltip: 'Edit',
                           onPressed: () => _editBookmark(bm),
                         ),
                         IconButton(
-                          icon: Icon(Icons.delete, color: Colors.red),
+                          icon: const Icon(Icons.delete, color: Colors.red),
                           tooltip: 'Delete',
                           onPressed: () => _deleteBookmark(bm.id!),
                         ),
@@ -184,7 +197,7 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                 );
               },
             ),
-            SizedBox(height: 80),
+            const SizedBox(height: 80),
           ],
         ),
       ),
@@ -194,15 +207,15 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
           FloatingActionButton.extended(
             heroTag: 'openBook',
             onPressed: _openBook,
-            icon: Icon(Icons.menu_book),
-            label: Text('Open Book'),
+            icon: const Icon(Icons.menu_book),
+            label: const Text('Open Book'),
           ),
-          SizedBox(height: 12),
+          const SizedBox(height: 12),
           FloatingActionButton.extended(
             heroTag: 'addBookmark',
             onPressed: _addBookmark,
-            icon: Icon(Icons.bookmark_add),
-            label: Text('Add Bookmark'),
+            icon: const Icon(Icons.bookmark_add),
+            label: const Text('Add Bookmark'),
           ),
         ],
       ),
@@ -217,20 +230,20 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Text('Page Number'),
+          title: const Text('Page Number'),
           content: TextField(
             controller: controller,
             keyboardType: TextInputType.number,
-            decoration: InputDecoration(hintText: 'Enter page number'),
+            decoration: const InputDecoration(hintText: 'Enter page number'),
           ),
           actions: [
-            TextButton(onPressed: () => Navigator.pop(context), child: Text('Cancel')),
+            TextButton(onPressed: () => Navigator.pop(context), child: const Text('Cancel')),
             ElevatedButton(
               onPressed: () {
                 final value = int.tryParse(controller.text);
                 Navigator.pop(context, value);
               },
-              child: Text('OK'),
+              child: const Text('OK'),
             ),
           ],
         );
@@ -244,16 +257,16 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Text('Note / Footnote'),
+          title: const Text('Note / Footnote'),
           content: TextField(
             controller: controller,
-            decoration: InputDecoration(hintText: 'Enter note'),
+            decoration: const InputDecoration(hintText: 'Enter note'),
           ),
           actions: [
-            TextButton(onPressed: () => Navigator.pop(context), child: Text('Cancel')),
+            TextButton(onPressed: () => Navigator.pop(context), child: const Text('Cancel')),
             ElevatedButton(
               onPressed: () => Navigator.pop(context, controller.text),
-              child: Text('OK'),
+              child: const Text('OK'),
             ),
           ],
         );
@@ -267,16 +280,16 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Text('Rename Book'),
+          title: const Text('Rename Book'),
           content: TextField(
             controller: controller,
-            decoration: InputDecoration(hintText: 'Enter new title'),
+            decoration: const InputDecoration(hintText: 'Enter new title'),
           ),
           actions: [
-            TextButton(onPressed: () => Navigator.pop(context), child: Text('Cancel')),
+            TextButton(onPressed: () => Navigator.pop(context), child: const Text('Cancel')),
             ElevatedButton(
               onPressed: () => Navigator.pop(context, controller.text),
-              child: Text('OK'),
+              child: const Text('OK'),
             ),
           ],
         );

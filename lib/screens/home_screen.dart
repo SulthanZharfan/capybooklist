@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:capybooklist/services/weather_service.dart';
 import 'package:capybooklist/models/weather.dart';
 import 'package:capybooklist/db/user_dao.dart';
+import 'package:capybooklist/db/book_dao.dart';
+import 'package:capybooklist/models/book.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -16,12 +18,10 @@ class _HomeScreenState extends State<HomeScreen> {
   String _error = '';
   String _userName = '';
   String _userCity = 'Jakarta';
+  List<Book> _recentBooks = [];
 
   final _weatherService = WeatherService();
-
-  final List<String> _historyBooks = [
-    'Book 1', 'Book 2', 'Book 3', 'Book 4', 'Book 5'
-  ];
+  final _bookDao = BookDao();
 
   @override
   void initState() {
@@ -32,6 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Future<void> _initialize() async {
     await _loadUser();
     await _loadWeather();
+    await _loadRecentBooks();
   }
 
   Future<void> _loadUser() async {
@@ -57,6 +58,15 @@ class _HomeScreenState extends State<HomeScreen> {
       setState(() {
         _error = 'Failed to load weather';
         _isLoading = false;
+      });
+    }
+  }
+
+  Future<void> _loadRecentBooks() async {
+    final books = await _bookDao.getRecentlyOpenedBooks(limit: 5);
+    if (mounted) {
+      setState(() {
+        _recentBooks = books;
       });
     }
   }
@@ -91,7 +101,6 @@ class _HomeScreenState extends State<HomeScreen> {
           Container(
             color: Colors.black.withOpacity(0.5),
           ),
-
           SafeArea(
             child: _isLoading
                 ? const Center(child: CircularProgressIndicator())
@@ -127,8 +136,7 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-
-                // ---------- Layout 1 ----------
+                // Layout 1
                 Column(
                   children: [
                     Row(
@@ -151,7 +159,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       ],
                     ),
                     const SizedBox(height: 6),
-
                     Text(
                       '${_weather!.temperature.toStringAsFixed(0)}°',
                       style: const TextStyle(
@@ -161,7 +168,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                     const SizedBox(height: 10),
-
                     Text(
                       _userName.isEmpty ? 'Hello 👋' : 'Hello $_userName 👋',
                       style: const TextStyle(
@@ -171,7 +177,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                     const SizedBox(height: 6),
-
                     const Text(
                       'ingin baca apa hari ini ?',
                       style: TextStyle(
@@ -181,9 +186,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ],
                 ),
-
                 const SizedBox(height: 30),
-
                 Image.asset(
                   'assets/images/rumah.png',
                   width: 320,
@@ -195,7 +198,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
 
-        // ---------- Layout 2 ----------
+        // Layout 2
         Container(
           width: double.infinity,
           padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
@@ -213,7 +216,7 @@ class _HomeScreenState extends State<HomeScreen> {
               const Padding(
                 padding: EdgeInsets.only(bottom: 12.0),
                 child: Text(
-                  'History Books',
+                  'Recently Books',
                   style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
@@ -221,17 +224,21 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
               ),
-
-              SizedBox(
+              _recentBooks.isEmpty
+                  ? const Text(
+                'No recent books.',
+                style: TextStyle(color: Colors.white60),
+              )
+                  : SizedBox(
                 height: 120,
                 child: ListView.separated(
                   scrollDirection: Axis.horizontal,
-                  itemCount: _historyBooks.length,
+                  itemCount: _recentBooks.length,
                   separatorBuilder: (_, __) => const SizedBox(width: 12),
                   itemBuilder: (context, index) {
-                    final book = _historyBooks[index];
+                    final book = _recentBooks[index];
                     return Container(
-                      width: 80,
+                      width: 100,
                       decoration: BoxDecoration(
                         color: Colors.white24,
                         borderRadius: BorderRadius.circular(20),
@@ -244,12 +251,14 @@ class _HomeScreenState extends State<HomeScreen> {
                           const Icon(Icons.book, color: Colors.white, size: 36),
                           const SizedBox(height: 8),
                           Text(
-                            book,
+                            book.title,
                             textAlign: TextAlign.center,
                             style: const TextStyle(
                               color: Colors.white,
                               fontSize: 12,
                             ),
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
                           ),
                         ],
                       ),

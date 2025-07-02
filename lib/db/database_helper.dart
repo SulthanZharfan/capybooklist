@@ -131,6 +131,28 @@ class DatabaseHelper {
     return null;
   }
 
+  Future<int> updateLastOpenedAt(int id) async {
+    final db = await database;
+    return await db.update(
+      'books',
+      {'last_opened_at': DateTime.now().toIso8601String()},
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+  }
+
+  /// Fetch recently opened books (sorted by last_opened_at DESC)
+  Future<List<Book>> getRecentlyOpenedBooks({int limit = 5}) async {
+    final db = await database;
+    final result = await db.query(
+      'books',
+      where: 'last_opened_at IS NOT NULL',
+      orderBy: 'last_opened_at DESC',
+      limit: limit,
+    );
+    return result.map((e) => Book.fromMap(e)).toList();
+  }
+
   // =========================================
   // BOOKMARKS CRUD
   // =========================================
