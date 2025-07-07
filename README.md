@@ -36,37 +36,44 @@ Flutter : 3.29.2
 - 📚 tombol icon untuk Form book
 - 👤 tombol icon untuk Accounts
 - 🖥️ menentukan tampilan layar pertama
-- 🔀 navigasi layar
+- 🔀 navigasi layar<br>
+![mainnavigation](./screenshoot/mainnavigation.PNG)
 
 2. 🏡 **Homescreen**:
 - 🏙️ Menampilkan kota
 - ☁️ menampilkan icon cuaca
 - 🌡️ menampilkan derajat celcius kota tersebut
 - 🙋‍♂️ menampilkan nama pemilik akun
-- 📖 menampilkan buku yang terbaru dibuka
+- 📖 menampilkan buku yang terbaru dibuka<br>
+![homescreen](./screenshoot/homescreen.PNG)
 
 3. 📑 **Formbookscreen**:
 - 📚 menampilkan buku yang di uplod
 - ➕ tombol add untuk buku
 - ➖ tombol remove untuk buku
-- 🗄️ menampilkan data buku dari database
+- 🗄️ menampilkan data buku dari database<br>
+![formscreen](./screenshoot/formscreen.PNG)
 
 4. ➕ **Addbook**:
 - 📁 menampilkan isi file manager
 - 📄 filter berdasarkan tipe data PDF, DOC, dll
-- ✅ tinggal klik buku yang ingin di uplod
+- ✅ tinggal klik buku yang ingin di uplod<br>
+![addbook](./screenshoot/addbook.PNG)
 
 5. 📖 **Open book**:
 - 👓 bisa membaca bukunya
 - 🔖 memberi bookmark
 - ✏️ mengedit judul buku
-- 📌 memberi tahu halaman terakhir buku
+- 📌 memberi tahu halaman terakhir buku<br>
+![openbook](./screenshoot/openbook.PNG)
 
 6. 👤 **Account**:
 - 📝 mengisi nama pengguna
 - 🎂 mengisi umur
-- 🏙️ mengisi kota
+- 🏙️ mengisi kota<br>
+![accountscreen](./screenshoot/accountsscreen.PNG)
 
-7. 🔄 **Bisa landscape**
+7. 🔄 **Bisa landscape**<br>
+![landscape](./screenshoot/landscape.PNG)
 
-8. 🎨 **Berisi animasi dan gambar 3D**
+9. 🎨 **Berisi animasi dan gambar 3D**
