@@ -3,6 +3,9 @@
 ## Tentang Proyek
 Proyek ini adalah Tugas Besar untuk mata kuliah **Pemrograman Berbasis Mobile** CapyBookList adalah aplikasi sederhana yang memungkinkan pengguna membaca buku digital dengan cara mengunggah (upload) file buku mereka sendiri. Aplikasi ini memberikan pengalaman membaca yang lebih personal dan dinamis dengan menggabungkan fitur cuaca melalui API Weather.
 
+## Link Presentasi CapyBookList di YouTube 
+https://youtu.be/4eab-cepGHg
+
 ## Anggota Kelompok
 
 | icon             | Nama                     | NPM          | Peran               |
